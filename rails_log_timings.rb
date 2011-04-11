@@ -82,7 +82,13 @@ total.keys.each do |key|
 
    puts "%25s  %5s %5s %5s %5s %5s : %s" % ['', '', 'Count', 'Min', 'Avg', 'Max', "50ms buckets"]
 
-   puts "%25s: %5s %5d %5d %5d %5d   %s" % [ a, 'Total', *total.report(key).map{|x| x.to_i}, total.bucket(key, 50).inspect]
-   puts "%25s  %5s %5d %5d %5d %5d   %s" % ['', 'View',  *view.report(key).map{|x| x.to_i},  view.bucket(key, 50).inspect]
-   puts "%25s  %5s %5d %5d %5d %5d   %s" % ['', 'DB',    *db.report(key).map{|x| x.to_i},    db.bucket(key, 50).inspect]
+   y = total.report(key).map{|x| x.to_i}
+
+   puts "%25s: %5s %5d %5d %5d %5d   %s" % [ a, 'Total', y[0], y[1], y[2], y[3], total.bucket(key, 50).inspect]
+
+   y = view.report(key).map{|x| x.to_i}
+   puts "%25s  %5s %5d %5d %5d %5d   %s" % ['', 'View',  y[0], y[1], y[2], y[3], view.bucket(key, 50).inspect]
+
+   y = db.report(key).map{|x| x.to_i}
+   puts "%25s  %5s %5d %5d %5d %5d   %s" % ['', 'DB',    y[0], y[1], y[2], y[3], db.bucket(key, 50).inspect]
 end
